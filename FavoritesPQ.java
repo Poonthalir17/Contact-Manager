@@ -1,10 +1,4 @@
-/**
- * ADT 6 (bonus): Priority queue (hand-written max-heap).
- * The contact with the highest callCount is always at the top.
- *
- * Important: when a contact's callCount changes, remove it and insert it again
- * so the heap order stays correct (ContactManager.makeCall does this).
- */
+
 public class FavoritesPQ {
 
     private Contact[] heap = new Contact[16];
@@ -33,7 +27,9 @@ public class FavoritesPQ {
         return top;
     }
 
-    /** Removes a specific contact (same object) from the heap. */
+
+
+    
     public boolean remove(Contact c) {
         for (int i = 0; i < size; i++) {
             if (heap[i] == c) {
@@ -51,7 +47,11 @@ public class FavoritesPQ {
         return false;
     }
 
-    /** Returns the top k contacts without changing this heap. */
+
+
+
+
+    
     public Contact[] topK(int k) {
         FavoritesPQ copy = new FavoritesPQ();
         copy.heap = new Contact[heap.length];
