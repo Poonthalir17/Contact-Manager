@@ -1,20 +1,15 @@
 import java.util.ArrayList;
 
-/**
- * Controller class: connects all the ADTs together.
- * Main only talks to this class.
- */
 public class ContactManager {
 
-    private final ContactHashTable contacts = new ContactHashTable(); // phone -> Contact
-    private final ContactTrie trie = new ContactTrie();               // name prefix search
-    private final FavoritesPQ favorites = new FavoritesPQ();          // most-called first
-    private final CallLogList callLog = new CallLogList();            // full history
-    private final RecentCallsDeque recent = new RecentCallsDeque(10); // last 10 calls
-    private final MissedCallQueue missed = new MissedCallQueue();     // calls to return
-    private final UndoStack undoStack = new UndoStack();              // deleted contacts
+    private final ContactHashTable contacts = new ContactHashTable(); 
+    private final ContactTrie trie = new ContactTrie();             
+    private final FavoritesPQ favorites = new FavoritesPQ();          
+    private final CallLogList callLog = new CallLogList();          
+    private final RecentCallsDeque recent = new RecentCallsDeque(10); 
+    private final MissedCallQueue missed = new MissedCallQueue();     
+    private final UndoStack undoStack = new UndoStack();              
 
-    // ---------- contacts ----------
 
     public void addContact(String name, String phone, String group) {
         if (name.isEmpty() || phone.isEmpty()) {
@@ -61,7 +56,7 @@ public class ContactManager {
         System.out.println("Restored: " + c.getName() + " (call count kept: " + c.getCallCount() + ")");
     }
 
-    /** Puts a contact into the hash table, trie and priority queue. */
+   
     private void register(Contact c) {
         contacts.put(c.getPhone(), c);
         trie.insert(c.getName(), c);
@@ -79,8 +74,9 @@ public class ContactManager {
         }
     }
 
-    // ---------- search ----------
 
+
+    
     public void searchByPrefix(String prefix) {
         if (prefix.isEmpty()) {
             System.out.println("Type at least one letter.");
@@ -102,7 +98,10 @@ public class ContactManager {
         System.out.println(c == null ? "  Not found." : "  " + c);
     }
 
-    // ---------- calls ----------
+
+
+
+    
 
     public void makeCall(String phone) {
         Contact c = contacts.get(phone);
@@ -110,7 +109,7 @@ public class ContactManager {
             System.out.println("No contact with that number.");
             return;
         }
-        // update priority: remove, change count, insert again
+        /
         favorites.remove(c);
         c.incrementCallCount();
         favorites.insert(c);
@@ -147,7 +146,9 @@ public class ContactManager {
         makeCall(rec.getPhone());
     }
 
-    // ---------- views ----------
+
+
+    
 
     public void showMissedCalls() {
         missed.display();
@@ -174,7 +175,11 @@ public class ContactManager {
         if (!any) System.out.println("  (no favorites yet, make some calls first)");
     }
 
-    /** Contacts you have never called (candidates for cleanup). */
+
+
+
+
+    
     public void showCleanupSuggestions() {
         Contact[] all = contacts.toArray();
         boolean any = false;
