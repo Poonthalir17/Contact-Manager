@@ -1,6 +1,4 @@
-
- 
-public class CallLogList {
+ public class CallLogList {
 
     private static class Node {
         CallRecord data;
